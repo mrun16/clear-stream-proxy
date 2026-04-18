@@ -29,14 +29,18 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Lakshmanrekha" },
+      { name: "description", content: "Secure LLM proxy" },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Lakshmanrekha" },
+      { property: "og:description", content: "Secure LLM proxy" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Lakshmanrekha" },
+      { name: "twitter:description", content: "Secure LLM proxy" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e1e925c7-b4a2-4aac-b2d9-c3018a12fbd0/id-preview-cecca27b--7ec9a0c8-47b6-41dd-96e5-fd6ed18bff0c.lovable.app-1776523516738.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e1e925c7-b4a2-4aac-b2d9-c3018a12fbd0/id-preview-cecca27b--7ec9a0c8-47b6-41dd-96e5-fd6ed18bff0c.lovable.app-1776523516738.png" },
     ],
     links: [
       {
