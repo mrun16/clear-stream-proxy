@@ -22,6 +22,17 @@ export function ChatPanel({ sessionId, onLogged }: { sessionId: string; onLogged
   const fileRef = useRef<HTMLInputElement>(null);
 
   const onPickFile = async (f: File) => {
+    const isImage = f.type.startsWith("image/");
+    if (isImage) {
+      // Images can't be analyzed as text by the worker LLM in this proxy.
+      // We surface filename + a short notice so the user sees the upload worked.
+      setFileContent(
+        `[Image attached: ${f.name} — ${f.type}, ${Math.round(f.size / 1024)} KB. ` +
+          `This proxy currently inspects text only; image bytes are not forwarded to the LLM.]`,
+      );
+      setFileName(f.name);
+      return;
+    }
     const text = await f.text();
     setFileContent(text.slice(0, 20000));
     setFileName(f.name);
@@ -131,7 +142,7 @@ export function ChatPanel({ sessionId, onLogged }: { sessionId: string; onLogged
           <input
             ref={fileRef}
             type="file"
-            accept=".txt,.md,.json,.csv,.log,.py,.js,.ts,.html"
+            accept=".txt,.md,.json,.csv,.log,.py,.js,.ts,.html,image/*"
             className="hidden"
             onChange={(e) => {
               const f = e.target.files?.[0];
