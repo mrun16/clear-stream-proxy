@@ -261,7 +261,7 @@ export const sendChat = createServerFn({ method: "POST" })
     // 2. Worker LLM
     let reply = "";
     try {
-      reply = await callWorker(userText, fileText, canary);
+      reply = await callWorker(userText, fileText, imageDataUrl, canary);
     } catch (e) {
       const msg = e instanceof Error ? e.message : "worker error";
       const entry: LogEntry = {
