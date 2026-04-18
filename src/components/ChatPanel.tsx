@@ -56,10 +56,12 @@ export function ChatPanel({ sessionId, onLogged }: { sessionId: string; onLogged
       message: input,
       fileContent,
       fileName,
+      imageDataUrl,
     };
     setInput("");
     setFileContent("");
     setFileName("");
+    setImageDataUrl("");
     setBusy(true);
     try {
       const res = await send({ data: payload });
