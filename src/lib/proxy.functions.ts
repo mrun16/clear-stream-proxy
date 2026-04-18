@@ -193,6 +193,7 @@ export const sendChat = createServerFn({ method: "POST" })
       message: z.string().min(1).max(8000),
       fileContent: z.string().max(20000).optional().default(""),
       fileName: z.string().max(200).optional().default(""),
+      imageDataUrl: z.string().max(8_000_000).optional().default(""),
     }),
   )
   .handler(async ({ data }): Promise<ChatResponse> => {
@@ -200,6 +201,7 @@ export const sendChat = createServerFn({ method: "POST" })
     const canary = getCanaryForSession(sessionId);
     const userText = normalize(data.message);
     const fileText = normalize(data.fileContent || "");
+    const imageDataUrl = data.imageDataUrl || "";
     const preview = userText.slice(0, 120);
 
     // 1. Vibe check
