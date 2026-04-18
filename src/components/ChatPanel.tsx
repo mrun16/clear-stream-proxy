@@ -114,19 +114,33 @@ export function ChatPanel({ sessionId, onLogged }: { sessionId: string; onLogged
 
       <Card className="p-3 space-y-2 bg-card/60">
         {fileName && (
-          <div className="flex items-center justify-between text-xs bg-muted rounded px-2 py-1">
-            <span className="truncate">
-              <Upload className="inline h-3 w-3 mr-1" />
-              {fileName} ({fileContent.length} chars) — will be wrapped in{" "}
-              <code className="text-primary">&lt;untrusted_data&gt;</code>
-            </span>
+          <div className="flex items-center justify-between gap-2 text-xs bg-muted rounded px-2 py-1">
+            <div className="flex items-center gap-2 min-w-0">
+              {imageDataUrl ? (
+                <img
+                  src={imageDataUrl}
+                  alt={fileName}
+                  className="h-10 w-10 rounded object-cover border border-border"
+                />
+              ) : (
+                <Upload className="h-3 w-3 shrink-0" />
+              )}
+              <span className="truncate">
+                {fileName}
+                {imageDataUrl
+                  ? " — image will be sent to the vision model"
+                  : ` (${fileContent.length} chars) — wrapped in `}
+                {!imageDataUrl && <code className="text-primary">&lt;untrusted_data&gt;</code>}
+              </span>
+            </div>
             <button
               onClick={() => {
                 setFileContent("");
                 setFileName("");
+                setImageDataUrl("");
                 if (fileRef.current) fileRef.current.value = "";
               }}
-              className="text-muted-foreground hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground shrink-0"
               aria-label="Remove file"
             >
               <X className="h-3 w-3" />
